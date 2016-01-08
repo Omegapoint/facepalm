@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>OP Facepalm</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+    <link href="css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="css/font-awesome.min.css" rel="stylesheet"/>
+    <link href="css/styles.css" rel="stylesheet"/>
+</head>
+<body>
+<th:block th:include="fragments/navbar_fragment :: navbar"/>
+<div class="row">
+    <main class="col-md-offset-1 col-md-6">
+        <h3 th:text="#{policies}">Policies</h3>
+        <span>These are the policies for usage of this application. Please select which one to read from the list below.</span>
+
+        <form th:action="@{/policy}" method="GET">
+            <div class="input-group">
+                <select id="file" name="file" class="form-control">
+                    <option value="general.txt">General usage</option>
+                    <option value="security.txt">Security</option>
+                    <option value="advertising.txt">Advertising</option>
+                    <option value="copyright.txt">Copyrighted material</option>
+                </select>
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="submit">Show</button>
+                    </span>
+            </div>
+            <label for="file" th:if="${message != null}" th:text="${message}"></label>
+        </form>
+        <hr/>
+        <section class="box" th:if="${fileContents != null}">
+            <span th:text="${fileContents.text}">File contents</span>
+        </section>
+    </main>
+    <aside class="col-sm-3">
+        <th:block th:include="fragments/newsletter_fragment :: newsletter"/>
+        <hr/>
+        <th:block th:include="fragments/commercial_fragment :: commercials"/>
+    </aside>
+</div>
+
+<th:block th:include="fragments/javascript_fragment :: javascript"/>
+</body>
+</html>

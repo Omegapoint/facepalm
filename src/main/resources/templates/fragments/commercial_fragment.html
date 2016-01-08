@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>OP Facepalm</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+    <link href="css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="css/styles.css" rel="stylesheet"/>
+</head>
+<body>
+<th:block th:fragment="commercials">
+    <h3 th:text="#{commercials}"></h3>
+    <div th:each="commercial : ${commercials}">
+        <img th:src="${commercial.uri}"/>
+        <h4 class="side-header" th:text="${commercial.title}"></h4>
+    </div>
+</th:block>
+</body>
+</html>

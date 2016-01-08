@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>OP Facebook</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+    <link href="css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="css/font-awesome.css" rel="stylesheet"/>
+    <link href="css/styles.css" rel="stylesheet"/>
+</head>
+<body>
+<div id="fb-root"></div>
+<div class="wrapper">
+    <div class="row">
+        <div class="column col-sm-12 col-xs-12" id="main">
+            <th:block th:include="fragments/navbar_fragment :: navbar_not_logged_in"/>
+
+            <main class="padding">
+                <div class="row">
+                    <div class="col-md-5 col-md-offset-2">
+                        <h1>Welcome to <span class="tahoma">facepalm</span>.</h1>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-5 col-md-offset-2">
+                        <h3>This is meant as a test-site used for experimenting with security vulnerabilities.</h3>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="fb-like-box" data-href="https://www.facebook.com/omegapointab" data-colorscheme="light" data-show-faces="false" data-header="false"
+                             data-stream="false" data-show-border="false"></div>
+                    </div>
+                </div>
+                <hr/>
+
+                <div class="row">
+                    <div class="col-md-offset-2 col-md-3">
+                        <th:block th:replace="fragments/login_box_fragment :: login_box"></th:block>
+                    </div>
+                    <div class="col-md-4">
+                        <th:block th:replace="fragments/register_fragment :: register"></th:block>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+</div>
+
+<script src="js/jquery-2.1.3.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/login.js"></script>
+</body>
+</html>

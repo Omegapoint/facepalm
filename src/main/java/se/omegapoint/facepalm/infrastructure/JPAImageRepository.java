@@ -1,0 +1,84 @@
+package se.omegapoint.facepalm.infrastructure;
+
+import org.apache.commons.io.IOUtils;
+import org.hibernate.Hibernate;
+import org.hibernate.Session;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+import se.omegapoint.facepalm.domain.Image;
+import se.omegapoint.facepalm.domain.repository.ImageRepository;
+import se.omegapoint.facepalm.infrastructure.db.ImagePost;
+import se.omegapoint.facepalm.infrastructure.db.StoredImage;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import java.sql.Blob;
+import java.util.List;
+import java.util.Optional;
+
+import static org.apache.commons.lang3.Validate.notBlank;
+import static org.apache.commons.lang3.Validate.notNull;
+
+@Repository
+@Transactional
+public class JPAImageRepository implements ImageRepository {
+
+    @PersistenceContext
+    private EntityManager entityManager;
+
+    @Override
+    public List<ImagePost> findAll() {
+        return entityManager.createQuery("SELECT im FROM ImagePost im ORDER BY im.id DESC", ImagePost.class).getResultList();
+    }
+
+    @Override
+    public Optional<ImagePost> findById(String id) {
+        notBlank(id);
+
+        final String query = String.format("SELECT * FROM IMAGE_POSTS WHERE id = %s", id);
+        final List<ImagePost> imagePosts = entityManager.createNativeQuery(query, ImagePost.class).getResultList();
+
+        return imagePosts.size() == 1 ? Optional.of(imagePosts.get(0)) : Optional.empty();
+    }
+
+    @Override
+    public void addImage(final String title, final byte[] data) {
+        final Session session = entityManager.unwrap(Session.class);
+        final Blob blob = Hibernate.getLobCreator(session).createBlob(data);
+
+        final StoredImage storedImage = new StoredImage();
+        storedImage.setData(blob);
+
+        final ImagePost imagePost = ImagePost.builder()
+                .withPoints(0L)
+                .withNumComments(0L)
+                .withTitle(title)
+                .withStoredImage(storedImage)
+                .build();
+
+        entityManager.persist(imagePost);
+    }
+
+    @Override
+    public Image findImageByPostId(final Long id) {
+        notNull(id);
+
+        final List<ImagePost> result = entityManager.createQuery("SELECT im FROM ImagePost im WHERE im.id = :id", ImagePost.class)
+                .setParameter("id", id)
+                .getResultList();
+
+        if (result.size() != 1) {
+            return null;
+        }
+
+        final StoredImage storedImage = result.get(0).getStoredImage();
+        final Image image;
+        try {
+            image = new Image(IOUtils.toByteArray(storedImage.getData().getBinaryStream()));
+        } catch (Exception e) {
+            throw new IllegalStateException("Could not read image from database with ID " + id);
+        }
+
+        return image;
+    }
+}

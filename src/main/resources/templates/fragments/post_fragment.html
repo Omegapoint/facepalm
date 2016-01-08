@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>OP Facepalm</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+    <link href="css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="css/styles.css" rel="stylesheet"/>
+</head>
+<body>
+<th:block th:fragment="single_post">
+    <section class="row">
+        <a th:href="${'/image?id=' + post.id}">
+            <h4 class="post-header" th:utext="${post.title}"></h4>
+            <img class="post-image" th:src="@{/img/} + ${post.id}"/>
+        </a>
+    </section>
+    <section class="row post-actions">
+        <button class="btn btn-default"><i class="fa fa-thumbs-o-up"></i></button>
+        <button class="btn btn-default"><i class="fa fa-thumbs-o-down"></i></button>
+        <a th:href="${'/image?id=' + post.id}">
+            <span th:text="#{comments}"></span>
+        </a>
+    </section>
+    <hr/>
+</th:block>
+</body>
+</html>

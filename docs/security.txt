@@ -1,0 +1,55 @@
+1.0 Overview
+All employees and personnel that have access to organizational computer systems must adhere to the password policies defined below in order to protect the security of the network, protect data integrity, and protect computer systems.
+
+2.0 Purpose
+This policy is designed to protect the organizational resources on the network by requiring strong passwords along with protection of these passwords, and establishing a minimum time between changes to passwords.
+
+3.0 Scope
+This policy applies to any and all personnel who have any form of computer account requiring a password on the organizational network including but not limited to a domain account and e-mail account.
+
+4.0 Password Protection
+Never write passwords down.
+Never send a password through email.
+Never include a password in a non-encrypted stored document.
+Never tell anyone your password.
+Never reveal your password over the telephone.
+Never hint at the format of your password.
+Never reveal or hint at your password on a form on the internet.
+Never use the "Remember Password" feature of application programs such as Internet Explorer, your email program, or any other program.
+Never use your corporate or network password on an account over the internet which does not have a secure login where the web browser address starts with https:// rather than http://
+Report any suspician of your password being broken to your IT computer security office.
+If anyone asks for your password, refer them to your IT computer security office.
+Don't use common acronyms as part of your password.
+Don't use common words or reverse spelling of words in part of your password.
+Don't use names of people or places as part of your password.
+Don't use part of your login name in your password.
+Don't use parts of numbers easily remembered such as phone numbers, social security numbers, or street addresses.
+Be careful about letting someone see you type your password.
+5.0 Password Requirements (subject to change)
+Those setting password requirements must remember that making the password rules too difficult may actually decrease security if users decide the rules are impossible or too difficult to meet. If passwords are changed too often, users may tend to write them down or make their password a variant of an old password which an attacker with the old password could guess. The following password requirements will be set by the IT security department:
+
+Minimum Length - 8 characters recommended
+Maximum Length - 14 characters
+Minimum complexity - No dictionary words included. Passwords should use three of four of the following four types of characters:
+Lowercase
+Uppercase
+Numbers
+Special characters such as !@#$%^&*(){}[]
+Passwords are case sensitive and the user name or login ID is not case sensitive.
+Password history - Require a number of unique passwords before an old password may be reused. This number should be no less than 24.
+Maximum password age - 60 days
+Minimum password age - 2 days
+Store passwords using reversible encryption - This should not be done without special authorization by the IT department since it would reduce the security of the user's password.
+Account lockout threshold - 4 failed login attempts
+Reset account lockout after - The time it takes between bad login attempts before the count of bad login attempts is cleared. The recommended value as of the date of writing this article is 20 minutes. This means if there are three bad attempts in 20 minutes, the account would be locked.
+Account lockout duration - Some experts recommend that the administrator reset the account lockout so they are aware of possible break in attempts on the network. However this will cause a great deal of additional help desk calls. Therefore depending on the situation, the account lockout should be between 30 minutes and 2 hours.
+Password protected screen savers should be enabled and should protect the computer within 5 minutes of user inactivity. Computers should not be unattended with the user logged on and no password protected screen saver active. Users should be in the habit of not leaving their computers unlocked. they can press the CTRL-ALT-DEL keys and select "Lock Computer".
+Rules that apply to passwords apply to passphrases which are used for public/private key authentication
+6.0 Choosing Passwords
+Use password choosing tips as shown at http://www.comptechdoc.org/docs/ctdp/howtopass/ and be sure your passwords meet the minimum guidelines.
+
+7.0 Enforcement
+Since password security is critical to the security of the organization and everyone, employees that do not adhere to this policy may be subject to disciplinary action up to and including dismissal.
+
+8.0 Other Considerations
+Administrator passwords should be protected very carefully. Administrator accounts should have the minimum access to perform their function. Administrator accounts should not be shared.

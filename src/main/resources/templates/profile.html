@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>OP Facepalm</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+    <link href="css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="css/font-awesome.min.css" rel="stylesheet"/>
+    <link href="css/styles.css" rel="stylesheet"/>
+</head>
+<body>
+<div class="row">
+    <th:block th:include="fragments/navbar_fragment :: navbar"/>
+    <div class="row">
+        <main class="col-md-offset-1 col-md-6">
+            <th:block th:include="fragments/profile_header_fragment :: profile_header"/>
+            <th:block th:include="fragments/profile_activity_fragment :: profile_activity"/>
+        </main>
+        <aside class="col-sm-3">
+            <th:block th:include="fragments/newsletter_fragment :: newsletter"/>
+            <hr/>
+            <th:block th:include="fragments/commercial_fragment :: commercials"/>
+        </aside>
+    </div>
+</div>
+
+<th:block th:include="fragments/javascript_fragment :: javascript"/>
+</body>
+</html>

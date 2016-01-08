@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>OP Facepalm</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+    <link href="css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="css/font-awesome.min.css" rel="stylesheet"/>
+    <link href="css/styles.css" rel="stylesheet"/>
+    <script src="js/jquery-2.1.3.min.js"></script>
+    <script src="js/app.js"></script>
+</head>
+<body>
+<th:block th:fragment="register">
+    <section class="box">
+        <h3 th:text="#{join}">Join</h3>
+        <form class="form-signin" th:object="${registerCredentials}" th:action="@{/register}" method="post">
+            <div class="message" th:if="${registerMessage != null}">
+                <p class="label label-danger" th:text="${registerMessage}">Registration failure</p>
+            </div>
+
+            <input id="username" type="text" class="form-control" placeholder="Username (3-20 characters)" required="required" th:field="*{username}"/>
+            <div class="error-message" th:if="${#fields.hasErrors('username')}">
+                <p class="label label-danger" th:errors="*{username}">Incorrect username</p>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <input id="firstname" type="text" class="form-control" placeholder="Firstname" required="required" th:field="*{firstname}"/>
+                    <div th:if="${#fields.hasErrors('firstname')}">
+                        <p class="label label-danger" th:errors="*{firstname}">Incorrect firstname</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <input id="lastname" type="text" class="form-control" placeholder="Lastname" required="required" th:field="*{lastname}"/>
+                    <div th:if="${#fields.hasErrors('lastname')}">
+                        <p class="label label-danger" th:errors="*{lastname}">Incorrect lastname</p>
+                    </div>
+                </div>
+            </div>
+
+            <input id="email" type="email" class="form-control" placeholder="Email" required="required" th:field="*{email}"/>
+            <div th:if="${#fields.hasErrors('email')}">
+                <p class="label label-danger" th:errors="*{email}">Incorrect email</p>
+            </div>
+
+            <input id="password" type="password" class="form-control" placeholder="Password" required="required" th:field="*{password}"/>
+            <div th:if="${#fields.hasErrors('password')}">
+                <p class="label label-danger" th:errors="*{password}">Incorrect password</p>
+            </div>
+
+            <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Sign in</button>
+        </form>
+    </section>
+</th:block>
+</body>
+</html>
