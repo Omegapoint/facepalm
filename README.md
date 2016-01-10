@@ -21,6 +21,10 @@ Currently, the following (at least) vulnerabilities are known:
 
 More are beging worked on.  :+1:
 
+## I just want to test it!
+There is a jar available at the root of the repository (which can be downloaded directly from Github page).
+The jar might be out of date since it will most likely not be refreshed on each commit. Just at on risk, best is always to build yourself!
+
 ## Setup
 #### Editor (IntelliJ)
 1. Clone the repository
