@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import se.omegapoint.facepalm.client.adapters.ImageAdapter;
+import se.omegapoint.facepalm.client.models.ImageComment;
+import se.omegapoint.facepalm.client.models.ImagePost;
 import se.omegapoint.facepalm.client.models.ImageUpload;
 import se.omegapoint.facepalm.domain.Image;
-import se.omegapoint.facepalm.domain.ImageComment;
-import se.omegapoint.facepalm.domain.ImagePost;
 
 import java.io.IOException;
 import java.util.List;

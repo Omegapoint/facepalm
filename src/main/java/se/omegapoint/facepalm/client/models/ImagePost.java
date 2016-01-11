@@ -1,4 +1,4 @@
-package se.omegapoint.facepalm.domain;
+package se.omegapoint.facepalm.client.models;
 
 import static org.apache.commons.lang3.Validate.notBlank;
 import static org.apache.commons.lang3.Validate.notNull;
