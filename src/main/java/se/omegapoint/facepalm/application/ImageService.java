@@ -10,6 +10,7 @@ import se.omegapoint.facepalm.domain.repository.CommentRepository;
 import se.omegapoint.facepalm.domain.repository.ImageRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 import static java.util.stream.Collectors.toList;
 import static org.apache.commons.lang3.Validate.notBlank;
@@ -25,15 +26,13 @@ public class ImageService {
     private CommentRepository commentRepository;
 
     public List<ImagePost> getTopImages() {
-        return imageRepository.findAll().stream()
-                .map(ImagePost::new)
-                .collect(toList());
+        return imageRepository.findAll();
     }
 
-    public ImagePost getImagePost(final String id) {
+    public Optional<ImagePost> getImagePost(final String id) {
         notBlank(id);
 
-        return imageRepository.findById(id).map(ImagePost::new).orElse(null);
+        return imageRepository.findById(id);
     }
 
     public List<ImageComment> getCommentsForImage(final Long id) {
@@ -51,7 +50,7 @@ public class ImageService {
     public void addImagePost(final String title, final byte[] data) {
         notBlank(title);
         notNull(data);
-        imageRepository.addImage(title, data);
+        imageRepository.addImagePost(title, data);
     }
 
     public Image getImageFor(final Long id) {

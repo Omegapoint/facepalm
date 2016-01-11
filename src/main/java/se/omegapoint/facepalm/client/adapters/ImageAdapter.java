@@ -12,6 +12,7 @@ import se.omegapoint.facepalm.domain.ImageComment;
 import se.omegapoint.facepalm.domain.ImagePost;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.apache.commons.lang3.Validate.notBlank;
 import static org.apache.commons.lang3.Validate.notNull;
@@ -31,7 +32,7 @@ public class ImageAdapter {
         return imageService.getTopImages();
     }
 
-    public ImagePost getImage(final String id) {
+    public Optional<ImagePost> getImage(final String id) {
         notBlank(id);
         return imageService.getImagePost(id);
     }

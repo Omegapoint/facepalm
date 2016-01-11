@@ -18,6 +18,7 @@ import se.omegapoint.facepalm.domain.ImagePost;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 import static org.apache.commons.lang3.Validate.notNull;
 
@@ -35,13 +36,13 @@ public class ImageController {
 
     @RequestMapping("/image")
     public String image(final @RequestParam String id, final Model model) {
-        final ImagePost image = imageAdapter.getImage(id);
-        if (image == null) {
+        final Optional<ImagePost> image = imageAdapter.getImage(id);
+        if (!image.isPresent()) {
             return "redirect:/404";
         }
 
-        final List<ImageComment> comments = imageAdapter.getCommentsForImage(image.id);
-        model.addAttribute("image", image);
+        final List<ImageComment> comments = imageAdapter.getCommentsForImage(image.get().id);
+        model.addAttribute("image", image.get());
         model.addAttribute("comments", comments);
         return "image";
     }
