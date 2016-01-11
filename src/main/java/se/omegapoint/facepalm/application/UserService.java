@@ -17,7 +17,6 @@ import static se.omegapoint.facepalm.application.UserService.UserSuccess.USER_RE
 @Service
 public class UserService {
 
-
     @Autowired
     private UserRepository userRepository;
 
