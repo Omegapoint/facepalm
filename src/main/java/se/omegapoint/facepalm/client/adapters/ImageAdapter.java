@@ -10,8 +10,6 @@ import se.omegapoint.facepalm.client.models.ImagePost;
 import se.omegapoint.facepalm.client.models.ImageUpload;
 import se.omegapoint.facepalm.client.security.AuthenticatedUser;
 import se.omegapoint.facepalm.domain.Image;
-import se.omegapoint.facepalm.domain.NumberOfComments;
-import se.omegapoint.facepalm.domain.NumberOfPoints;
 import se.omegapoint.facepalm.domain.Title;
 
 import java.util.List;
@@ -75,6 +73,6 @@ public class ImageAdapter {
     }
 
     private ImagePost imagePost(final se.omegapoint.facepalm.domain.ImagePost image) {
-        return new ImagePost(image.id, new Title(image.title), new NumberOfPoints(image.numPoints), new NumberOfComments(image.numComments));
+        return new ImagePost(image.id, image.title.value, image.numPoints.value, image.numComments.value);
     }
 }

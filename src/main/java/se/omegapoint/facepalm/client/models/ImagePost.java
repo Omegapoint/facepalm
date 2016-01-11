@@ -1,20 +1,17 @@
 package se.omegapoint.facepalm.client.models;
 
-import se.omegapoint.facepalm.domain.NumberOfComments;
-import se.omegapoint.facepalm.domain.NumberOfPoints;
-import se.omegapoint.facepalm.domain.Title;
-
+import static org.apache.commons.lang3.Validate.notBlank;
 import static org.apache.commons.lang3.Validate.notNull;
 
 public class ImagePost {
     public final Long id;
-    public final Title title;
-    public final NumberOfPoints numPoints;
-    public final NumberOfComments numComments;
+    public final String title;
+    public final Long numPoints;
+    public final Long numComments;
 
-    public ImagePost(final Long id, final Title title, final NumberOfPoints points, final NumberOfComments numComments) {
+    public ImagePost(final Long id, final String title, final Long points, final Long numComments) {
         this.id = notNull(id);
-        this.title = notNull(title);
+        this.title = notBlank(title);
         this.numPoints = notNull(points);
         this.numComments = notNull(numComments);
     }

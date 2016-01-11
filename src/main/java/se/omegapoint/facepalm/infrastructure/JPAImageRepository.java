@@ -6,6 +6,8 @@ import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import se.omegapoint.facepalm.domain.Image;
+import se.omegapoint.facepalm.domain.NumberOfComments;
+import se.omegapoint.facepalm.domain.NumberOfPoints;
 import se.omegapoint.facepalm.domain.Title;
 import se.omegapoint.facepalm.domain.repository.ImageRepository;
 import se.omegapoint.facepalm.infrastructure.db.ImagePost;
@@ -88,6 +90,11 @@ public class JPAImageRepository implements ImageRepository {
     }
 
     private se.omegapoint.facepalm.domain.ImagePost convertToDomain(final ImagePost i) {
-        return new se.omegapoint.facepalm.domain.ImagePost(i.getId(),i.getTitle(), i.getPoints(), i.getNumComments());
+        return new se.omegapoint.facepalm.domain.ImagePost(
+                i.getId(),
+                new Title(i.getTitle()),
+                new NumberOfPoints(i.getPoints()),
+                new NumberOfComments(i.getNumComments())
+        );
     }
 }
