@@ -6,6 +6,7 @@ import se.omegapoint.facepalm.application.transfer.NewImageComment;
 import se.omegapoint.facepalm.domain.Image;
 import se.omegapoint.facepalm.domain.ImageComment;
 import se.omegapoint.facepalm.domain.ImagePost;
+import se.omegapoint.facepalm.domain.Title;
 import se.omegapoint.facepalm.domain.repository.CommentRepository;
 import se.omegapoint.facepalm.domain.repository.ImageRepository;
 
@@ -47,8 +48,8 @@ public class ImageService {
         commentRepository.addComment(new ImageComment(newImageComment.imageId, newImageComment.author, newImageComment.text));
     }
 
-    public void addImagePost(final String title, final byte[] data) {
-        notBlank(title);
+    public void addImagePost(final Title title, final byte[] data) {
+        notNull(title);
         notNull(data);
         imageRepository.addImagePost(title, data);
     }

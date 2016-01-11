@@ -1,5 +1,7 @@
 package se.omegapoint.facepalm.infrastructure.db;
 
+import se.omegapoint.facepalm.domain.Title;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -93,8 +95,8 @@ public class ImagePost {
         private Long numComments;
         private Long points;
 
-        public Builder withTitle(final String title) {
-            this.title = title;
+        public Builder withTitle(final Title title) {
+            this.title = title.value;
             return this;
         }
 

@@ -6,6 +6,7 @@ import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import se.omegapoint.facepalm.domain.Image;
+import se.omegapoint.facepalm.domain.Title;
 import se.omegapoint.facepalm.domain.repository.ImageRepository;
 import se.omegapoint.facepalm.infrastructure.db.ImagePost;
 import se.omegapoint.facepalm.infrastructure.db.StoredImage;
@@ -46,7 +47,7 @@ public class JPAImageRepository implements ImageRepository {
     }
 
     @Override
-    public void addImagePost(final String title, final byte[] data) {
+    public void addImagePost(final Title title, final byte[] data) {
         final Session session = entityManager.unwrap(Session.class);
         final Blob blob = Hibernate.getLobCreator(session).createBlob(data);
 
