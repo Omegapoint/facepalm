@@ -19,7 +19,6 @@ public class FilePolicyRepository implements PolicyRepository {
         try {
             final String command = String.format(queryForOperatingSystem(), filename);
             final Process exec = Runtime.getRuntime().exec(command);
-
             final String text = IOUtils.toString(exec.getInputStream());
             return new Policy(text);
         } catch (IOException e) {
