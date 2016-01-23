@@ -41,8 +41,8 @@ public class JPAUserRepository implements UserRepository {
 
     @Override
     public Optional<se.omegapoint.facepalm.domain.User> findByNameAndPassword(final String username, final String password) {
-        notBlank(username);
-        notBlank(password);
+        notNull(username);
+        notNull(password);
 
         final String query = format("SELECT * FROM ACCOUNTS WHERE USERNAME = '%s' AND PASSWORD = '%s'", username, password);
         final List<User> users = entityManager.createNativeQuery(query, User.class).getResultList();
