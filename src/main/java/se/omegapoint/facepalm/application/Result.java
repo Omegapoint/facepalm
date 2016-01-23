@@ -3,7 +3,6 @@ package se.omegapoint.facepalm.application;
 import java.util.Optional;
 
 public class Result<S, F> {
-
     private final S success;
     private final F failure;
 
@@ -22,6 +21,10 @@ public class Result<S, F> {
 
     public boolean isSuccess() {
         return success != null;
+    }
+
+    public boolean isFailure() {
+        return success == null;
     }
 
     public S success() {

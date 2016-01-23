@@ -1,7 +1,8 @@
 package se.omegapoint.facepalm.domain.repository;
 
 import se.omegapoint.facepalm.domain.Image;
-import se.omegapoint.facepalm.infrastructure.db.ImagePost;
+import se.omegapoint.facepalm.domain.ImagePost;
+import se.omegapoint.facepalm.domain.Title;
 
 import java.util.List;
 import java.util.Optional;
@@ -11,7 +12,7 @@ public interface ImageRepository {
 
     Optional<ImagePost> findById(String id);
 
-    void addImage(String title, byte[] data);
+    void addImagePost(Title title, byte[] data);
 
     Image findImageByPostId(Long id);
 }

@@ -6,6 +6,9 @@ import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import se.omegapoint.facepalm.domain.Image;
+import se.omegapoint.facepalm.domain.NumberOfComments;
+import se.omegapoint.facepalm.domain.NumberOfPoints;
+import se.omegapoint.facepalm.domain.Title;
 import se.omegapoint.facepalm.domain.repository.ImageRepository;
 import se.omegapoint.facepalm.infrastructure.db.ImagePost;
 import se.omegapoint.facepalm.infrastructure.db.StoredImage;
@@ -16,6 +19,7 @@ import java.sql.Blob;
 import java.util.List;
 import java.util.Optional;
 
+import static java.util.stream.Collectors.toList;
 import static org.apache.commons.lang3.Validate.notBlank;
 import static org.apache.commons.lang3.Validate.notNull;
 
@@ -27,22 +31,25 @@ public class JPAImageRepository implements ImageRepository {
     private EntityManager entityManager;
 
     @Override
-    public List<ImagePost> findAll() {
-        return entityManager.createQuery("SELECT im FROM ImagePost im ORDER BY im.id DESC", ImagePost.class).getResultList();
+    public List<se.omegapoint.facepalm.domain.ImagePost> findAll() {
+        final List<ImagePost> images = entityManager.createQuery("SELECT im FROM ImagePost im ORDER BY im.id DESC", ImagePost.class).getResultList();
+        return images.stream()
+                .map(this::convertToDomain)
+                .collect(toList());
     }
 
     @Override
-    public Optional<ImagePost> findById(String id) {
+    public Optional<se.omegapoint.facepalm.domain.ImagePost> findById(String id) {
         notBlank(id);
 
         final String query = String.format("SELECT * FROM IMAGE_POSTS WHERE id = %s", id);
         final List<ImagePost> imagePosts = entityManager.createNativeQuery(query, ImagePost.class).getResultList();
 
-        return imagePosts.size() == 1 ? Optional.of(imagePosts.get(0)) : Optional.empty();
+        return imagePosts.size() == 1 ? Optional.of(convertToDomain(imagePosts.get(0))) : Optional.empty();
     }
 
     @Override
-    public void addImage(final String title, final byte[] data) {
+    public void addImagePost(final Title title, final byte[] data) {
         final Session session = entityManager.unwrap(Session.class);
         final Blob blob = Hibernate.getLobCreator(session).createBlob(data);
 
@@ -80,5 +87,14 @@ public class JPAImageRepository implements ImageRepository {
         }
 
         return image;
+    }
+
+    private se.omegapoint.facepalm.domain.ImagePost convertToDomain(final ImagePost i) {
+        return new se.omegapoint.facepalm.domain.ImagePost(
+                i.getId(),
+                new Title(i.getTitle()),
+                new NumberOfPoints(i.getPoints()),
+                new NumberOfComments(i.getNumComments())
+        );
     }
 }
