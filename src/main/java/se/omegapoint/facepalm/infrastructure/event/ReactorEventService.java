@@ -27,7 +27,7 @@ public class ReactorEventService implements EventService {
         publishEventWith(new GenericEvent(data));
     }
 
-    public void register(final Selector channel, final Consumer<Event<ApplicationEvent>> eventListener) {
+    public <E extends ApplicationEvent> void register(final Selector channel, final Consumer<Event<E>> eventListener) {
         notNull(eventListener);
         notNull(channel);
         eventBus.on(channel, eventListener);

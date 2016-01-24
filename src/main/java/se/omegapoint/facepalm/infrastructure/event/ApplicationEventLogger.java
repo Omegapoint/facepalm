@@ -7,11 +7,11 @@ import reactor.fn.Consumer;
 
 import static org.apache.commons.lang3.Validate.notNull;
 
-public final class ApplicationEventLogger implements Consumer<Event<ApplicationEvent>> {
+public final class ApplicationEventLogger implements Consumer<Event<GenericEvent>> {
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
     @Override
-    public void accept(final Event<ApplicationEvent> event) {
+    public void accept(final Event<GenericEvent> event) {
         notNull(event);
         logger.info(event.getData().message());
     }
