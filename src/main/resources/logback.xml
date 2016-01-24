@@ -4,7 +4,7 @@
         <file>./logs/events.log</file>
         <encoder>
             <charset>UTF-8</charset>
-            <pattern>%msg%n</pattern>
+            <pattern>%date %msg%n</pattern>
         </encoder>
     </appender>
 
