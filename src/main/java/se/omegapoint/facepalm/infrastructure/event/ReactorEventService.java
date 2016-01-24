@@ -15,9 +15,9 @@ public class ReactorEventService implements EventService {
         this.eventBus = notNull(eventBus);
     }
 
-    public void publish(final Object event) {
-        notNull(event);
-        eventBus.notify(EventChannel.GLOBAL.channel, Event.wrap(event));
+    public void publishEventWith(final Object data) {
+        notNull(data);
+        eventBus.notify(EventChannel.GLOBAL.channel, Event.wrap(data));
     }
 
     public void register(final Consumer<Event<Object>> eventListener) {

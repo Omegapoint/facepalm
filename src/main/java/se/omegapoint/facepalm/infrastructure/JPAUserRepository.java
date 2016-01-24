@@ -2,8 +2,10 @@ package se.omegapoint.facepalm.infrastructure;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import se.omegapoint.facepalm.domain.EventService;
 import se.omegapoint.facepalm.domain.NewUserCredentials;
 import se.omegapoint.facepalm.domain.repository.UserRepository;
 import se.omegapoint.facepalm.infrastructure.db.Friendship;
@@ -28,9 +30,15 @@ import static org.apache.commons.lang3.Validate.notNull;
 public class JPAUserRepository implements UserRepository {
 
     private final static Logger LOGGER = LoggerFactory.getLogger(JPAUserRepository.class);
+    private final EventService eventService;
 
     @PersistenceContext
     private EntityManager entityManager;
+
+    @Autowired
+    public JPAUserRepository(final EventService eventService) {
+        this.eventService = notNull(eventService);
+    }
 
     @Override
     public Optional<se.omegapoint.facepalm.domain.User> findByUsername(final String username) {
@@ -84,6 +92,8 @@ public class JPAUserRepository implements UserRepository {
     @Override
     public void addUser(final NewUserCredentials credentials) {
         notNull(credentials);
+
+        eventService.publishEventWith(credentials);
 
         entityManager.persist(new User(credentials.username, credentials.email, credentials.firstname, credentials.lastname, credentials.password));
     }

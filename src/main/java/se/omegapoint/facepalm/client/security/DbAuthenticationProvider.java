@@ -35,10 +35,10 @@ public class DbAuthenticationProvider implements AuthenticationProvider {
 
         return user.map(u -> {
             final UsernamePasswordAuthenticationToken result = new UsernamePasswordAuthenticationToken(new AuthenticatedUser(u.username), null, emptyList());
-            eventService.publish(successfulLoginWith(username, password));
+            eventService.publishEventWith(successfulLoginWith(username, password));
             return result;
         }).orElseGet(() -> {
-            eventService.publish(unsuccessfulLoginWith(username, password));
+            eventService.publishEventWith(unsuccessfulLoginWith(username, password));
             return null;
         });
     }
