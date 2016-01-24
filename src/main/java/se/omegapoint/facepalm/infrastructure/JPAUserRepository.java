@@ -25,6 +25,7 @@ import static java.util.stream.Collectors.toSet;
 import static org.apache.commons.lang3.Validate.notBlank;
 import static org.apache.commons.lang3.Validate.notNull;
 
+@SuppressWarnings("unchecked")
 @Repository
 @Transactional
 public class JPAUserRepository implements UserRepository {
@@ -44,7 +45,10 @@ public class JPAUserRepository implements UserRepository {
     public Optional<se.omegapoint.facepalm.domain.User> findByUsername(final String username) {
         notBlank(username);
 
-        return findUserFromUsername(username).map(this::convertUserToDomain);
+        eventService.publishEventWith(format("Searching for username[%s]", username));
+
+        return findUserFromUsername(username)
+                .map(this::convertUserToDomain);
     }
 
     @Override
@@ -53,8 +57,17 @@ public class JPAUserRepository implements UserRepository {
         notNull(password);
 
         final String query = format("SELECT * FROM ACCOUNTS WHERE USERNAME = '%s' AND PASSWORD = '%s'", username, password);
+
         final List<User> users = entityManager.createNativeQuery(query, User.class).getResultList();
-        return users.isEmpty() ? Optional.empty() : Optional.of(convertUserToDomain(users.get(0)));
+
+        eventService.publishEventWith(users.isEmpty() ?
+                format("No matching user with username[%s], password[%s]", username, password) :
+                format("Found matching users with username[%s], password[%s]", username, password)
+        );
+
+        return users.isEmpty() ?
+                Optional.empty() :
+                Optional.of(convertUserToDomain(users.get(0)));
     }
 
     @Override
@@ -75,6 +88,8 @@ public class JPAUserRepository implements UserRepository {
     @Override
     public Set<se.omegapoint.facepalm.domain.User> findFriendsFor(final String username) {
         notBlank(username);
+
+        eventService.publishEventWith(format("Searching for friends with username[%s]", username));
 
         final List<User> friends = entityManager.createNativeQuery("" +
                 "SELECT * FROM ACCOUNTS WHERE USERNAME IN                " +
@@ -115,6 +130,8 @@ public class JPAUserRepository implements UserRepository {
     public void addFriend(final String user, final String friendToAdd) {
         notBlank(user);
         notBlank(friendToAdd);
+
+        eventService.publishEventWith(format("User[%s] is now friend of [%s]", user, friendToAdd));
 
         entityManager.persist(new Friendship(user, friendToAdd, Date.valueOf(LocalDate.now())));
     }
