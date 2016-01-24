@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import se.omegapoint.facepalm.client.security.DbAuthenticationProvider;
+import se.omegapoint.facepalm.domain.EventService;
 import se.omegapoint.facepalm.domain.repository.UserRepository;
 
 @Configuration
@@ -18,6 +19,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    EventService eventService;
 
     @Override
     @Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
@@ -38,6 +42,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(final AuthenticationManagerBuilder managerBuilder) throws Exception {
-        managerBuilder.authenticationProvider(new DbAuthenticationProvider(userRepository));
+        managerBuilder.authenticationProvider(new DbAuthenticationProvider(userRepository, eventService));
     }
 }
