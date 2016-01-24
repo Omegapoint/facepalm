@@ -2,6 +2,7 @@ package se.omegapoint.facepalm.infrastructure.event;
 
 import reactor.bus.Event;
 import reactor.bus.EventBus;
+import reactor.bus.selector.Selector;
 import reactor.fn.Consumer;
 import se.omegapoint.facepalm.domain.EventService;
 
@@ -20,9 +21,9 @@ public class ReactorEventService implements EventService {
         eventBus.notify(EventChannel.GLOBAL.channel, Event.wrap(data));
     }
 
-    public void register(final Consumer<Event<Object>> eventListener) {
+    public void register(final Consumer<Event<Object>> eventListener, final Selector channel) {
         notNull(eventListener);
-        eventBus.on(EventChannel.GLOBAL.selector(), eventListener);
+        eventBus.on(channel, eventListener);
     }
 }
 
