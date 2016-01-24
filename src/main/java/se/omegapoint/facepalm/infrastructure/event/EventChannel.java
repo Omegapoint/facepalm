@@ -5,7 +5,8 @@ import reactor.bus.selector.Selector;
 import static reactor.bus.selector.Selectors.$;
 
 public enum EventChannel {
-    GLOBAL("all");
+    GLOBAL("all"),
+    AUDIT("sensitive");
 
     public final String channel;
 
