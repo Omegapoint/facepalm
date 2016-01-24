@@ -38,8 +38,7 @@ public class SearchAdapter {
     }
 
     private boolean isFriendsWithCurrentUser(final User friend) {
-        final AuthenticatedUser authenticatedUser = currentUser();
-        return friendService.usersAreFriends(authenticatedUser.userName, friend.username);
+        return friendService.usersAreFriends(currentUser().userName, friend.username);
     }
 
     private AuthenticatedUser currentUser() {
