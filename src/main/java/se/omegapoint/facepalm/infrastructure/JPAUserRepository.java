@@ -10,6 +10,7 @@ import se.omegapoint.facepalm.domain.NewUserCredentials;
 import se.omegapoint.facepalm.domain.repository.UserRepository;
 import se.omegapoint.facepalm.infrastructure.db.Friendship;
 import se.omegapoint.facepalm.infrastructure.db.User;
+import se.omegapoint.facepalm.infrastructure.event.GenericEvent;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -89,7 +90,7 @@ public class JPAUserRepository implements UserRepository {
     public Set<se.omegapoint.facepalm.domain.User> findFriendsFor(final String username) {
         notBlank(username);
 
-        eventService.publishEventWith(format("Searching for friends with username[%s]", username));
+        eventService.publishEventWith(new GenericEvent(format("Searching for friends with username[%s]", username)));
 
         final List<User> friends = entityManager.createNativeQuery("" +
                 "SELECT * FROM ACCOUNTS WHERE USERNAME IN                " +

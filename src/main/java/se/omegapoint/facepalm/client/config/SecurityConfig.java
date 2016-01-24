@@ -42,6 +42,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(final AuthenticationManagerBuilder managerBuilder) throws Exception {
-        managerBuilder.authenticationProvider(new DbAuthenticationProvider(userRepository, eventService));
+        managerBuilder.authenticationProvider(new DbAuthenticationProvider(userRepository));
     }
 }

@@ -14,7 +14,7 @@
         </encoder>
     </appender>
 
-    <logger name="se.omegapoint.facepalm.infrastructure.event.EventLogger" additivity="false">
+    <logger name="se.omegapoint.facepalm.infrastructure.event.ApplicationEventLogger" additivity="false">
         <appender-ref ref="EVENTS"/>
     </logger>
 

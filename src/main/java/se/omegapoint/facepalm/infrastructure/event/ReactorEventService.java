@@ -7,6 +7,7 @@ import reactor.fn.Consumer;
 import se.omegapoint.facepalm.domain.EventService;
 
 import static org.apache.commons.lang3.Validate.notNull;
+import static se.omegapoint.facepalm.infrastructure.event.EventChannel.GLOBAL;
 
 public class ReactorEventService implements EventService {
 
@@ -16,12 +17,17 @@ public class ReactorEventService implements EventService {
         this.eventBus = notNull(eventBus);
     }
 
-    public void publishEventWith(final Object data) {
-        notNull(data);
-        eventBus.notify(EventChannel.GLOBAL.channel, Event.wrap(data));
+    public void publishEventWith(final ApplicationEvent event) {
+        notNull(event);
+        eventBus.notify(GLOBAL.channel, Event.wrap(event));
     }
 
-    public void register(final Selector channel, final Consumer<Event<Object>> eventListener) {
+    public void publishEventWith(final Object data) {
+        notNull(data);
+        publishEventWith(new GenericEvent(data));
+    }
+
+    public void register(final Selector channel, final Consumer<Event<ApplicationEvent>> eventListener) {
         notNull(eventListener);
         notNull(channel);
         eventBus.on(channel, eventListener);
