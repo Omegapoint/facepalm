@@ -21,8 +21,9 @@ public class ReactorEventService implements EventService {
         eventBus.notify(EventChannel.GLOBAL.channel, Event.wrap(data));
     }
 
-    public void register(final Consumer<Event<Object>> eventListener, final Selector channel) {
+    public void register(final Selector channel, final Consumer<Event<Object>> eventListener) {
         notNull(eventListener);
+        notNull(channel);
         eventBus.on(channel, eventListener);
     }
 }

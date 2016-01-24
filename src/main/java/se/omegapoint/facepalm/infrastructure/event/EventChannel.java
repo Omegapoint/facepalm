@@ -14,7 +14,7 @@ public enum EventChannel {
         this.channel = channel;
     }
 
-    public Selector selector() {
+    public Selector channel() {
         return $(channel);
     }
 }
