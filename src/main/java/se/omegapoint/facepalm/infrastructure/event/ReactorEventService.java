@@ -17,14 +17,9 @@ public class ReactorEventService implements EventService {
         this.eventBus = notNull(eventBus);
     }
 
-    public void publishEventWith(final ApplicationEvent event) {
+    public void publish(final ApplicationEvent event) {
         notNull(event);
         eventBus.notify(GLOBAL.channel, Event.wrap(event));
-    }
-
-    public void publishEventWith(final Object data) {
-        notNull(data);
-        publishEventWith(new GenericEvent(data));
     }
 
     public <E extends ApplicationEvent> void register(final Selector channel, final Consumer<Event<E>> eventListener) {

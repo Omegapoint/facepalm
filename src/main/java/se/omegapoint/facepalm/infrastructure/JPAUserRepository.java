@@ -46,7 +46,7 @@ public class JPAUserRepository implements UserRepository {
     public Optional<se.omegapoint.facepalm.domain.User> findByUsername(final String username) {
         notBlank(username);
 
-        eventService.publishEventWith(format("Searching for username[%s]", username));
+        eventService.publish(new GenericEvent(format("Searching for username[%s]", username)));
 
         return findUserFromUsername(username)
                 .map(this::convertUserToDomain);
@@ -61,9 +61,9 @@ public class JPAUserRepository implements UserRepository {
 
         final List<User> users = entityManager.createNativeQuery(query, User.class).getResultList();
 
-        eventService.publishEventWith(users.isEmpty() ?
-                format("No matching user with username[%s], password[%s]", username, password) :
-                format("Found matching users with username[%s], password[%s]", username, password)
+        eventService.publish(users.isEmpty() ?
+                new GenericEvent(format("No matching user with username[%s], password[%s]", username, password)) :
+                new GenericEvent(format("Found matching users with username[%s], password[%s]", username, password))
         );
 
         return users.isEmpty() ?
@@ -90,7 +90,7 @@ public class JPAUserRepository implements UserRepository {
     public Set<se.omegapoint.facepalm.domain.User> findFriendsFor(final String username) {
         notBlank(username);
 
-        eventService.publishEventWith(new GenericEvent(format("Searching for friends with username[%s]", username)));
+        eventService.publish(new GenericEvent(format("Searching for friends with username[%s]", username)));
 
         final List<User> friends = entityManager.createNativeQuery("" +
                 "SELECT * FROM ACCOUNTS WHERE USERNAME IN                " +
@@ -109,7 +109,7 @@ public class JPAUserRepository implements UserRepository {
     public void addUser(final NewUserCredentials credentials) {
         notNull(credentials);
 
-        eventService.publishEventWith(credentials);
+        eventService.publish(new GenericEvent(credentials));
 
         entityManager.persist(new User(credentials.username, credentials.email, credentials.firstname, credentials.lastname, credentials.password));
     }
@@ -132,7 +132,7 @@ public class JPAUserRepository implements UserRepository {
         notBlank(user);
         notBlank(friendToAdd);
 
-        eventService.publishEventWith(format("User[%s] is now friend of [%s]", user, friendToAdd));
+        eventService.publish(new GenericEvent(format("User[%s] is now friend of [%s]", user, friendToAdd)));
 
         entityManager.persist(new Friendship(user, friendToAdd, Date.valueOf(LocalDate.now())));
     }

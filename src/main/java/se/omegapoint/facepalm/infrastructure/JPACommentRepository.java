@@ -7,6 +7,7 @@ import se.omegapoint.facepalm.domain.EventService;
 import se.omegapoint.facepalm.domain.ImageComment;
 import se.omegapoint.facepalm.domain.repository.CommentRepository;
 import se.omegapoint.facepalm.infrastructure.db.Comment;
+import se.omegapoint.facepalm.infrastructure.event.GenericEvent;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -31,7 +32,7 @@ public class JPACommentRepository implements CommentRepository {
 
     @Override
     public List<ImageComment> findByImageId(final Long id) {
-        eventService.publishEventWith(format("Searching for image with id[%s]", id));
+        eventService.publish(new GenericEvent(format("Searching for image with id[%s]", id)));
         return entityManager.createQuery("SELECT c FROM Comment c WHERE imageId = :id", Comment.class)
                 .setParameter("id", id)
                 .getResultList()
@@ -42,7 +43,7 @@ public class JPACommentRepository implements CommentRepository {
 
     @Override
     public void addComment(final ImageComment comment) {
-        eventService.publishEventWith(comment);
+        eventService.publish(new GenericEvent(comment));
         entityManager.persist(new Comment(comment.imageId, comment.author, comment.text));
     }
 }

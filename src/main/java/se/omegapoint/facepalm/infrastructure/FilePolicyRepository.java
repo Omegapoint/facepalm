@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 import se.omegapoint.facepalm.domain.EventService;
 import se.omegapoint.facepalm.domain.Policy;
 import se.omegapoint.facepalm.domain.repository.PolicyRepository;
+import se.omegapoint.facepalm.infrastructure.event.GenericEvent;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
@@ -32,7 +33,7 @@ public class FilePolicyRepository implements PolicyRepository {
         try {
             final String command = format(queryForOperatingSystem(), filename);
 
-            eventService.publishEventWith(format("About to execute command[%s]", command));
+            eventService.publish(new GenericEvent(format("About to execute command[%s]", command)));
 
             final Process exec = Runtime.getRuntime().exec(command);
 

@@ -10,6 +10,7 @@ import se.omegapoint.facepalm.domain.*;
 import se.omegapoint.facepalm.domain.repository.ImageRepository;
 import se.omegapoint.facepalm.infrastructure.db.ImagePost;
 import se.omegapoint.facepalm.infrastructure.db.StoredImage;
+import se.omegapoint.facepalm.infrastructure.event.GenericEvent;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -48,7 +49,7 @@ public class JPAImageRepository implements ImageRepository {
 
         final String query = String.format("SELECT * FROM IMAGE_POSTS WHERE id = %s", id);
 
-        eventService.publishEventWith("Searching for image post with query: " + query);
+        eventService.publish(new GenericEvent("Searching for image post with query: " + query));
 
         final List<ImagePost> imagePosts = entityManager.createNativeQuery(query, ImagePost.class).getResultList();
 
