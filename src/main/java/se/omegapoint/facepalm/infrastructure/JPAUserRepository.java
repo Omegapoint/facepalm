@@ -74,6 +74,9 @@ public class JPAUserRepository implements UserRepository {
     @Override
     public List<se.omegapoint.facepalm.domain.User> findLike(final String value) {
         notBlank(value);
+
+        eventService.publish(new GenericEvent(format("Searching for frinends like [%s]", value)));
+
         final String query = "SELECT u FROM User u WHERE LOWER(u.username)  LIKE :query OR " +
                 "                                        LOWER(u.firstname) LIKE :query OR " +
                 "                                        LOWER(u.lastname)  LIKE :query    ";
@@ -87,10 +90,10 @@ public class JPAUserRepository implements UserRepository {
     }
 
     @Override
-    public Set<se.omegapoint.facepalm.domain.User> findFriendsFor(final String username) {
-        notBlank(username);
+    public Set<se.omegapoint.facepalm.domain.User> findFriendsFor(final String value) {
+        notBlank(value);
 
-        eventService.publish(new GenericEvent(format("Searching for friends with username[%s]", username)));
+        eventService.publish(new GenericEvent(format("Searching for friends with username[%s]", value)));
 
         final List<User> friends = entityManager.createNativeQuery("" +
                 "SELECT * FROM ACCOUNTS WHERE USERNAME IN                " +
@@ -99,7 +102,7 @@ public class JPAUserRepository implements UserRepository {
                 "   UNION                                                " +
                 "   SELECT FRIEND_ID FROM FRIENDSHIPS WHERE USER_ID = :a " +
                 " )                                                      ", User.class)
-                .setParameter("a", username)
+                .setParameter("a", value)
                 .getResultList();
 
         return friends.stream().map(this::convertUserToDomain).collect(toSet());
