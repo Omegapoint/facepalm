@@ -30,12 +30,21 @@ The jar might be out of date since it will most likely not be refreshed on each 
 1. Clone the repository
 2. Open cloned folder inside editor
 3. Open "Application.java", run main method
+4. Open a browser and go to [http://localhost:8080](http://localhost:8080/)
+
+#### Standalone (no editor, using start script)
+1. Clone the repository
+2. Start application with
+```sh
+./run_application.sh
+```
+3. Open a browser and go to [http://localhost:8080](http://localhost:8080/)
 
 #### Standalone (no editor)
 1. Clone the repository
 2. Build using gradle
 ```gradle
-gradle build
+./gradlew build
 ```
 3. Copy build/libs/facepalm-x.x.x-SNAPSHOT.jar to some directory
 4. Copy 'docs'-folder to same directory
@@ -43,6 +52,7 @@ gradle build
 ```sh
 java -jar facepalm-x.x.x-SNAPSHOT.jar
 ```
+6. Open a browser and go to [http://localhost:8080](http://localhost:8080/)
 
 ## SQL Injection
 It is possible to perform SQL injections at multiple places in the applications.
