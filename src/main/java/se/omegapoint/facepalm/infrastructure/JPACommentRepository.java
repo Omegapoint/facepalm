@@ -42,8 +42,12 @@ public class JPACommentRepository implements CommentRepository {
     }
 
     @Override
-    public void addComment(final ImageComment comment) {
-        eventService.publish(new GenericEvent(comment));
-        entityManager.persist(new Comment(comment.imageId, comment.author, comment.text));
+    public void addComment(final Long imageId, final String author, final String text) {
+        debug(imageId, author, text);
+        entityManager.persist(new Comment(imageId, author, text));
+    }
+
+    private void debug(final Long imageId, final String author, final String text) {
+        eventService.publish(new GenericEvent(new StringBuilder().append(imageId).append(":").append(author).append(":").append(text)));
     }
 }
