@@ -8,6 +8,14 @@
         </encoder>
     </appender>
 
+    <!--<appender name="AUDIT" class="ch.qos.logback.core.FileAppender">-->
+    <!--<file>./logs/audit.log</file>-->
+    <!--<encoder>-->
+    <!--<charset>UTF-8</charset>-->
+    <!--<pattern>%date %msg%n</pattern>-->
+    <!--</encoder>-->
+    <!--</appender>-->
+
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <pattern>%msg%n</pattern>
@@ -17,6 +25,10 @@
     <logger name="se.omegapoint.facepalm.infrastructure.event.ApplicationEventLogger" additivity="false">
         <appender-ref ref="EVENTS"/>
     </logger>
+
+    <!--<logger name="se.omegapoint.facepalm.infrastructure.event.AuditEventLogger" additivity="false">-->
+    <!--<appender-ref ref="AUDIT"/>-->
+    <!--</logger>-->
 
     <root level="info">
         <appender-ref ref="STDOUT"/>
