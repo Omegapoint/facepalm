@@ -35,4 +35,14 @@ public class User {
     public int hashCode() {
         return Objects.hash(username, email, firstname, lastname);
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "username='" + username + '\'' +
+                ", email='" + email + '\'' +
+                ", firstname='" + firstname + '\'' +
+                ", lastname='" + lastname + '\'' +
+                '}';
+    }
 }

@@ -6,6 +6,7 @@ buildscript {
         mavenCentral()
         maven { url "https://repo.spring.io/snapshot" }
         maven { url "https://repo.spring.io/milestone" }
+        maven { url 'http://repo.spring.io/libs-release' }
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
@@ -23,10 +24,15 @@ jar {
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
+ext {
+    reactorVersion = '2.0.6.RELEASE'
+}
+
 repositories {
     mavenCentral()
     maven { url "https://repo.spring.io/snapshot" }
     maven { url "https://repo.spring.io/milestone" }
+    maven { url 'http://repo.spring.io/libs-release' }
 }
 
 
@@ -42,6 +48,8 @@ dependencies {
     compile('com.google.guava:guava:18.0')
     compile('org.hibernate:hibernate-validator:5.2.2.Final')
     compile('ch.qos.logback:logback-core:1.1.3')
+    compile "io.projectreactor:reactor-core:$reactorVersion"
+    compile "io.projectreactor:reactor-bus:$reactorVersion"
 
     runtime('org.hsqldb:hsqldb')
     testCompile('org.springframework.boot:spring-boot-starter-test')

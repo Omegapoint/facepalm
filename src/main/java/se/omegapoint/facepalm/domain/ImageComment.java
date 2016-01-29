@@ -11,4 +11,13 @@ public class ImageComment {
         this.author = author;
         this.text = text;
     }
+
+    @Override
+    public String toString() {
+        return "ImageComment{" +
+                "imageId=" + imageId +
+                ", author='" + author + '\'' +
+                ", text='" + text + '\'' +
+                '}';
+    }
 }

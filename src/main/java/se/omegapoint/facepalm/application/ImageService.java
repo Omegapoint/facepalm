@@ -45,7 +45,7 @@ public class ImageService {
     public void addComment(final NewImageComment newImageComment) {
         notNull(newImageComment);
 
-        commentRepository.addComment(new ImageComment(newImageComment.imageId, newImageComment.author, newImageComment.text));
+        commentRepository.addComment(newImageComment.imageId, newImageComment.author, newImageComment.text);
     }
 
     public void addImagePost(final Title title, final byte[] data) {
