@@ -18,7 +18,7 @@ public class StoredImage {
     private Long id;
 
     @Lob
-    @Column(name = "DATA")
+    @Column(name = "DATA", columnDefinition = "blob")
     private Blob data;
 
     public Long getId() {
