@@ -1,4 +1,5 @@
 # Facepalm
+[![][license img]][license]
 
 Most 'insecure' test web applications today does not feel like a real application, whether it's DWNA (PHP) or WebGoat etc. Facepalm is intended to be just that, a real application which happens to have severe security vulnerability. The application is a fused clone of Instagram, Facebook and 9gag
 
@@ -88,3 +89,7 @@ Command execution is a vulnarability where the attacker can perform an arbitrary
 ## Links
 
  * [Omegapoint AB](https://www.omegapoint.se)
+
+
+[license]:LICENSE
+[license img]:https://img.shields.io/badge/License-Apache%202-blue.svg
