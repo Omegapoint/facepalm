@@ -7,10 +7,10 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import se.omegapoint.facepalm.client.adapters.ImageAdapter;
 import se.omegapoint.facepalm.client.models.ImageUpload;
 
-import javax.transaction.Transactional;
 import java.io.BufferedInputStream;
 import java.io.InputStream;
 
