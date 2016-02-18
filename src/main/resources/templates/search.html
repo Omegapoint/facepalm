@@ -27,6 +27,7 @@
 <th:block th:include="fragments/navbar_fragment :: navbar"/>
 <div class="row">
     <main class="col-md-offset-1 col-md-6">
+        <h2 th:utext="'Search result for ' + ${searchQuery}"></h2>
         <section class="box">
             <th:block th:each="user : ${searchResult}">
                 <article th:replace="fragments/search_result_fragment :: entry(user=${user})"></article>

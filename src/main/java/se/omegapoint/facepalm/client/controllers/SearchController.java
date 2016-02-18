@@ -25,6 +25,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import se.omegapoint.facepalm.client.adapters.SearchAdapter;
 import se.omegapoint.facepalm.client.models.SearchQuery;
 
+import static java.util.Collections.emptyList;
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.apache.commons.lang3.Validate.notNull;
 
 @Controller
@@ -38,8 +40,9 @@ public class SearchController {
     }
 
     @RequestMapping(value = "search", method = RequestMethod.GET)
-    public String search(final @RequestParam("query") SearchQuery searchQuery, final Model model) {
-        model.addAttribute("searchResult", searchAdapter.findUsersLike(searchQuery));
+    public String search(final @RequestParam(value = "query", required = false) SearchQuery searchQuery, final Model model) {
+        model.addAttribute("searchResult", isNotBlank(searchQuery.value) ? searchAdapter.findUsersLike(searchQuery) : emptyList());
+        model.addAttribute("searchQuery", searchQuery.value);
 
         return "search";
     }
