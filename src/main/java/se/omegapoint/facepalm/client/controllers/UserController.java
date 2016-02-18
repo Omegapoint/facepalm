@@ -17,6 +17,8 @@
 package se.omegapoint.facepalm.client.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -42,6 +44,10 @@ public class UserController {
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login(final Model model) {
+        if (userIsLoggedIn()) {
+            return "redirect:/";
+        }
+
         model.addAttribute("registerCredentials", new RegisterCredentials());
         return "login";
     }
@@ -63,5 +69,9 @@ public class UserController {
             credentials.resetPasswords();
             return "login";
         }
+    }
+
+    private boolean userIsLoggedIn() {
+        return !(SecurityContextHolder.getContext().getAuthentication() instanceof AnonymousAuthenticationToken);
     }
 }
