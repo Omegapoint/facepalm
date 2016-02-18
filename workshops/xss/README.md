@@ -17,17 +17,25 @@ There are some areas that can be exploited using stored cross site scripting. A 
 <script>alert("Hello")</script>
 ```
 
+Most browser have built-in protection against XSS attacks. These safety mechanisms can be activated by adding a HTTP header in each HTTP response, namely 
+```html
+X-XSS-Protection: 1; mode=block
+```
+More safety headers can be found at https://www.owasp.org/index.php/List_of_useful_HTTP_headers
+
 ## Template rendering (Server side XSS)
 Most modern rendering frameworks handles proper output encoding for you. Thymeleaf, a popular server side template engine uses the tag *th:text="value"* for injecting content into an element. This tag also performs proper encoding so that arbitary JavaScript code will not run. 
 
 Facepalm has some areas where the automatic encoding is bypassed.
 
 #### Questions
-1. Can you find somewhere where an injection attack is possible?
-2. Why is it possible to execute an injection attack at that place?
+1. Can you find somewhere where a reflected XSS injection attack is possible?
+2. Can you find somewhere where a stored XSS injection attack is possible?
+3. Why is it possible to execute an injection attack at these place?
+4. How do you solve it? There are more than one answer
 
 ## Javascript rendering (DOM based XSS)
 Modern web applications is leaving the server-side rendering and moving towards a complete standalone frontend application. These applications are often completely based on JavaScript and DOM manipulation using JS. Plain JavaScript does not provide any autmatic enconding help.
 
 #### Questions
-##### DOM maniplation is not yet implemented in Facepalm
+##### DOM manipulation is not yet implemented in Facepalm
