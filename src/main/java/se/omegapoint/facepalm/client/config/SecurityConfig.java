@@ -53,7 +53,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).permitAll()
                 .and()
                 .exceptionHandling().accessDeniedPage("/access?error")
-                .and().csrf().disable(); // Enabling CSRF prevents file upload, must be fixed
+                .and().headers().xssProtection().block(false).xssProtectionEnabled(false).and() // Default setting for Spring Boot to activate XSS Protection (dont fix!)
+                .and().csrf().disable(); // FIXME [dh] Enabling CSRF prevents file upload, must be fixed
     }
 
     @Override
