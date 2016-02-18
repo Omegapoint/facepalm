@@ -63,9 +63,10 @@ java -jar facepalm-x.x.x-SNAPSHOT.jar
 
 
 ## Links
-
  * [Omegapoint AB](https://www.omegapoint.se)
-
+ 
+#### Copyrights
+ * [Icons8, Facepalm logo](https://icons8.com)
 
 [license]:LICENSE
 [license img]:https://img.shields.io/badge/License-Apache%202-blue.svg
