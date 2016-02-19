@@ -24,9 +24,14 @@ import se.omegapoint.facepalm.domain.Policy;
 import se.omegapoint.facepalm.domain.repository.PolicyRepository;
 import se.omegapoint.facepalm.infrastructure.event.GenericEvent;
 
-import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.Locale;
+import java.util.Optional;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 
 import static java.lang.String.format;
 import static org.apache.commons.lang3.Validate.notBlank;
@@ -35,6 +40,7 @@ import static org.apache.commons.lang3.Validate.notNull;
 @Repository
 public class FilePolicyRepository implements PolicyRepository {
 
+    private static final int TIMEOUT = 5;
     private final EventService eventService;
 
     @Autowired
@@ -43,28 +49,57 @@ public class FilePolicyRepository implements PolicyRepository {
     }
 
     @Override
-    public Policy retrievePolicyWith(final String filename) {
+    public Optional<Policy> retrievePolicyWith(final String filename) {
         notBlank(filename);
 
+        final ExecutorService executorService = Executors.newSingleThreadExecutor();
+        final Command command = commandBasedOnOperatingSystem(filename);
+        final Future<String> future = executorService.submit(command);
+
         try {
-            final String command = format(queryForOperatingSystem(), filename);
-
-            eventService.publish(new GenericEvent(format("About to execute command[%s]", command)));
-
-            final Process exec = Runtime.getRuntime().exec(command);
-
-            final String text = IOUtils.toString(exec.getInputStream(), Charset.forName("UTF-8"));
-
-            return new Policy(text);
-        } catch (IOException e) {
-            throw new IllegalStateException("Unable to read specified file " + filename);
+            eventService.publish(new GenericEvent(format("About to execute command[%s]", command.command)));
+            return Optional.of(new Policy(future.get(TIMEOUT, TimeUnit.SECONDS)));
+        } catch (Exception e) {
+            return Optional.empty();
         }
     }
 
-    private String queryForOperatingSystem() {
+    private Command commandBasedOnOperatingSystem(final String filename) {
         final String os = System.getProperty("os.name", "generic").toLowerCase(Locale.ENGLISH);
-        return os.contains("win") ?
-                "cmd /K \"cd docs && type %s && exit\"" :
-                "cat ./docs/%s";
+        return os.contains("win") ? new WindowsCommand(filename) : new UnixCommand(filename);
+    }
+
+    abstract class Command implements Callable<String> {
+        public final String command;
+
+        protected Command(final String command) {
+            this.command = notBlank(command);
+        }
+    }
+
+    class WindowsCommand extends Command {
+
+        public WindowsCommand(final String filename) {
+            super("cmd /K \"cd docs && type " + filename + " && exit\"");
+        }
+
+        @Override
+        public String call() throws Exception {
+            final Process exec = Runtime.getRuntime().exec(command);
+            return IOUtils.toString(exec.getInputStream(), Charset.forName("UTF-8"));
+        }
+    }
+
+    class UnixCommand extends Command {
+
+        public UnixCommand(final String filename) {
+            super("cat ./docs/" + filename);
+        }
+
+        @Override
+        public String call() throws Exception {
+            final Process exec = Runtime.getRuntime().exec(command);
+            return IOUtils.toString(exec.getInputStream(), Charset.forName("UTF-8"));
+        }
     }
 }

@@ -21,6 +21,8 @@ import se.omegapoint.facepalm.application.PolicyService;
 import se.omegapoint.facepalm.client.config.Adapter;
 import se.omegapoint.facepalm.client.models.Policy;
 
+import java.util.Optional;
+
 import static org.apache.commons.lang3.Validate.notNull;
 
 @Adapter
@@ -34,7 +36,7 @@ public class PolicyAdapter {
     }
 
     public Policy retrievePolicy(final String filename) {
-        final se.omegapoint.facepalm.domain.Policy policy = policyService.retrievePolicy(filename);
-        return new Policy(policy.text);
+        final Optional<se.omegapoint.facepalm.domain.Policy> policy = policyService.retrievePolicy(filename);
+        return policy.map(p -> new Policy(p.text)).orElseGet(() -> new Policy("Could not load policy"));
     }
 }

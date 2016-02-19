@@ -18,6 +18,8 @@ package se.omegapoint.facepalm.domain.repository;
 
 import se.omegapoint.facepalm.domain.Policy;
 
+import java.util.Optional;
+
 public interface PolicyRepository {
-    Policy retrievePolicyWith(String filename);
+    Optional<Policy> retrievePolicyWith(String filename);
 }

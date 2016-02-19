@@ -21,6 +21,8 @@ import org.springframework.stereotype.Service;
 import se.omegapoint.facepalm.domain.Policy;
 import se.omegapoint.facepalm.domain.repository.PolicyRepository;
 
+import java.util.Optional;
+
 import static org.apache.commons.lang3.Validate.notBlank;
 import static org.apache.commons.lang3.Validate.notNull;
 
@@ -34,7 +36,7 @@ public class PolicyService {
         this.policyRepository = notNull(policyRepository);
     }
 
-    public Policy retrievePolicy(final String filename) {
+    public Optional<Policy> retrievePolicy(final String filename) {
         notBlank(filename);
         return policyRepository.retrievePolicyWith(filename);
     }
