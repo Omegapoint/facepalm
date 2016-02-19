@@ -46,7 +46,7 @@
         </form>
         <hr/>
         <section class="box" th:if="${fileContents != null}">
-            <span th:text="${fileContents.text}">File contents</span>
+            <span th:utext="${#strings.replace( #strings.escapeXml( fileContents.text ),T(java.lang.System).getProperty('line.separator'),'&lt;br /&gt;')}" ></span>
         </section>
     </main>
     <aside class="col-sm-3">
