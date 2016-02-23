@@ -7,15 +7,22 @@ The application is written in Java 8 together with Spring Boot. As the source co
 
 **Please note that the security vulnerabilities are intended and should not be fixed by future contributers.**
 
-
-
 ## Workshops
 As this application is intended for workshops, some existing workshops can be found in the workshop directory.
 
 Current workshops are:
 * SQL Injection
+  1. Login POST injection (blind attack)
+  2. GET parameter injection. Display data graphically
+  3. Automatic tool: SQLMap
 * Cross-site scripting attacks (XSS)
+  1. Reflected (non-persistent) XSS (server-side template)
+  2. Stored (persistent) XSS (server-side template)
 * Command Execution
+  1. Display content of random file on filesystem
+  2. Execute arbitrary command on server
+* Session theft
+  1. Steal insecure cookie and overtake login
 
 ## I just want to test it!
 There is a jar available at the root of the repository (which can be downloaded directly from Github page).
@@ -58,9 +65,6 @@ Some of the technologies used
 java -jar facepalm-x.x.x-SNAPSHOT.jar
 ```
 6. Open a browser and go to [http://localhost:8080](http://localhost:8080/)
-
-
-
 
 ## Links
  * [Omegapoint AB](https://www.omegapoint.se)
