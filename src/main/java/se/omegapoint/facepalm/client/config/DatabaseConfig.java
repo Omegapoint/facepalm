@@ -51,7 +51,6 @@ public class DatabaseConfig {
         dataSource.setUsername(env.getProperty("db.username"));
         dataSource.setPassword(env.getProperty("db.password"));
         final Properties properties = new Properties();
-        properties.put("sql.syntax_mys", "true");
         dataSource.setConnectionProperties(properties);
         return dataSource;
     }
