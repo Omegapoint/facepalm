@@ -76,7 +76,7 @@ public class Bootstrapper implements InitializingBean {
     }
 
     private void createDocumentsIfNotPresent() {
-        File documentsFolder = new File("./docsds");
+        File documentsFolder = new File("./docs");
         if (!documentsFolder.isDirectory()) {
             LOGGER.info("Creating missing documents folder with sample text files...");
             documentsFolder.mkdir();
