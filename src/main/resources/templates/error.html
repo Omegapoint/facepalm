@@ -17,28 +17,34 @@
 
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-    <title>OP Facepalm</title>
+    <title>OP Facebook</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
     <link href="css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="css/font-awesome.min.css" rel="stylesheet"/>
+    <link href="css/font-awesome.css" rel="stylesheet"/>
     <link href="css/styles.css" rel="stylesheet"/>
 </head>
 <body>
-<div class="row">
-    <th:block th:include="fragments/navbar_fragment :: navbar"/>
+<div id="fb-root"></div>
+<div class="wrapper">
     <div class="row">
-        <main class="col-md-offset-1 col-md-6">
-            <h3 th:text="#{404}">404</h3>
-            <span th:text="#{404.details}">Page could not be found.</span>
-        </main>
-        <aside class="col-sm-3">
-            <th:block th:include="fragments/newsletter_fragment :: newsletter"/>
-            <hr/>
-            <th:block th:include="fragments/commercial_fragment :: commercials"/>
-        </aside>
+        <div class="column col-sm-12 col-xs-12" id="main">
+            <th:block th:if="${user != null}">
+                <th:block th:include="fragments/navbar_fragment :: navbar"/>
+            </th:block>
+            <th:block th:if="${user} == null">
+                <th:block th:include="fragments/navbar_fragment :: navbar_not_logged_in"/>
+            </th:block>
+
+            <main class="padding">
+                <div class="row">
+                    <div class="col-md-5 col-md-offset-2">
+                        <h2 th:text="${errorText}">Error</h2>
+                    </div>
+                </div>
+            </main>
+        </div>
     </div>
 </div>
 
-<th:block th:include="fragments/javascript_fragment :: javascript"/>
 </body>
 </html>
