@@ -1,7 +1,7 @@
 ![Facepalm][facepalm img]
 [![][license img]][license]
 
-Most 'insecure' test web applications today does not feel like a real application, whether it's DWNA (PHP) or WebGoat etc. Facepalm is intended to be just that, a real application which happens to have severe security vulnerability. The application is a fused clone of Instagram, Facebook and 9gag
+Most 'insecure' test web applications today does not feel like a real application, whether it's DVWA (PHP) or WebGoat etc. Facepalm is intended to be just that, a real application which happens to have severe security vulnerability. The application is a fused clone of Instagram, Facebook and 9gag
 
 The application is written in Java 8 together with Spring Boot. As the source code is fully available, the application is suitable for workshops where one learns to detect and solve security issues.
 
