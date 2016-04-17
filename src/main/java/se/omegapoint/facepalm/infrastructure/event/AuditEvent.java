@@ -16,5 +16,7 @@
 
 package se.omegapoint.facepalm.infrastructure.event;
 
+import se.omegapoint.facepalm.domain.event.ApplicationEvent;
+
 public interface AuditEvent extends ApplicationEvent {
 }

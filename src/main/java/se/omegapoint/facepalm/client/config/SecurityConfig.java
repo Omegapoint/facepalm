@@ -26,7 +26,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import se.omegapoint.facepalm.client.security.DbAuthenticationProvider;
-import se.omegapoint.facepalm.domain.EventService;
+import se.omegapoint.facepalm.domain.event.EventService;
 import se.omegapoint.facepalm.domain.repository.UserRepository;
 
 @Configuration

@@ -14,10 +14,8 @@
  * limitations under the License.
  */
 
-package se.omegapoint.facepalm.domain;
+package se.omegapoint.facepalm.domain.event;
 
-import se.omegapoint.facepalm.infrastructure.event.ApplicationEvent;
-
-public interface EventService {
-    void publish(ApplicationEvent event);
+public interface ApplicationEvent {
+    String message();
 }

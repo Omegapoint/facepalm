@@ -19,7 +19,7 @@ package se.omegapoint.facepalm.client.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import reactor.bus.EventBus;
-import se.omegapoint.facepalm.domain.EventService;
+import se.omegapoint.facepalm.domain.event.EventService;
 import se.omegapoint.facepalm.infrastructure.event.ApplicationEventLogger;
 import se.omegapoint.facepalm.infrastructure.event.ReactorEventService;
 

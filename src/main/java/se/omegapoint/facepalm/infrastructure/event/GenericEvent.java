@@ -16,6 +16,8 @@
 
 package se.omegapoint.facepalm.infrastructure.event;
 
+import se.omegapoint.facepalm.domain.event.ApplicationEvent;
+
 import java.util.Objects;
 
 import static org.apache.commons.lang3.Validate.notNull;

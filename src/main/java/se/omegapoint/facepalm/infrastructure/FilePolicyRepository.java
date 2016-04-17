@@ -19,8 +19,8 @@ package se.omegapoint.facepalm.infrastructure;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import se.omegapoint.facepalm.domain.EventService;
 import se.omegapoint.facepalm.domain.Policy;
+import se.omegapoint.facepalm.domain.event.EventService;
 import se.omegapoint.facepalm.domain.repository.PolicyRepository;
 import se.omegapoint.facepalm.infrastructure.event.GenericEvent;
 

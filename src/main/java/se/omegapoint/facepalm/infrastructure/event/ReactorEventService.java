@@ -20,7 +20,8 @@ import reactor.bus.Event;
 import reactor.bus.EventBus;
 import reactor.bus.selector.Selector;
 import reactor.fn.Consumer;
-import se.omegapoint.facepalm.domain.EventService;
+import se.omegapoint.facepalm.domain.event.ApplicationEvent;
+import se.omegapoint.facepalm.domain.event.EventService;
 
 import static org.apache.commons.lang3.Validate.notNull;
 import static se.omegapoint.facepalm.infrastructure.event.EventChannel.GLOBAL;
