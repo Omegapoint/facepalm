@@ -33,9 +33,9 @@ Some of the technologies used
 * Java 8
 * Spring Boot (and the rest of the Spring family)
 * Thymeleaf (for template rendering)
-* Gradle (for dependecy management)
+* Gradle (for dependency management)
 * Hibernate/JPA (for ORM/database)
-* HSQLDB (for in-memory database)
+* HSQLDB (for in-memory database). "Allows" SQLMap attack (which H2 does not)
 
 ## Setup for developers
 #### Editor (IntelliJ)
