@@ -91,7 +91,7 @@ public class JPAUserRepository implements UserRepository {
     public List<se.omegapoint.facepalm.domain.User> findLike(final String value) {
         notBlank(value);
 
-        eventService.publish(new GenericEvent(format("Searching for frinends like [%s]", value)));
+        eventService.publish(new GenericEvent(format("Searching for friends like [%s]", value)));
 
         final String query = "SELECT u FROM User u WHERE LOWER(u.username)  LIKE :query OR " +
                 "                                        LOWER(u.firstname) LIKE :query OR " +
