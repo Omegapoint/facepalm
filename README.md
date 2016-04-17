@@ -1,5 +1,6 @@
 ![Facepalm][facepalm img]
 [![][license img]][license]
+[![Build Status](https://travis-ci.org/Omegapoint/facepalm.svg?branch=master)](https://travis-ci.org/Omegapoint/facepalm)
 
 Most 'insecure' test web applications today does not feel like a real application, whether it's DVWA (PHP) or WebGoat etc. Facepalm is intended to be just that, a real application which happens to have severe security vulnerability. The application is a fused clone of Instagram, Facebook and 9gag
 
